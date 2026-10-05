@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+/* Dark mode will turn on when <html> has the class "dark" */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Our brand colors. Tailwind creates bg-brand, text-brand, etc. from these */
+@theme {
+  --color-brand: #6b7f3a;
+  --color-brand-dark: #556630;
+  --color-brand-light: #eef2e3;
+  --color-cream: #f6f1e7;
+  --color-card-light: #e8eedb;
+  --color-dark-bg: #0b100c;
+  --color-dark-surface: #151f17;
+  --color-dark-elevated: #202d22;
+  --color-dark-hover: #2d3c2f;
+  --color-dark-border: #3a4b3c;
+}
