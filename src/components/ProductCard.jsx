@@ -2,9 +2,12 @@ import { Link } from 'react-router-dom';
 import { Heart, Star, ShoppingCart } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { formatCurrency } from '../utils/currency';
+import { useWishlist } from '../context/WishlistContext';
 
 function ProductCard({ product }) {
   const { addToCart } = useCart();
+  const { isWishlisted, toggleWishlist } = useWishlist();
+const liked = isWishlisted(product.id);
   return (
     <div className="flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-card-light dark:border-dark-border dark:bg-dark-surface">
    
@@ -16,11 +19,14 @@ function ProductCard({ product }) {
           {product.image}
         </Link>
         <button
-          aria-label="Add to wishlist"
-          className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-white text-gray-600 shadow-sm hover:text-red-500 dark:bg-dark-surface dark:text-gray-300"
-        >
-          <Heart size={16} />
-        </button>
+  onClick={() => toggleWishlist(product)}
+  aria-label={liked ? 'Remove from wishlist' : 'Add to wishlist'}
+  className={`absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-white shadow-sm hover:text-red-500 dark:bg-dark-surface ${
+    liked ? 'text-red-500' : 'text-gray-600 dark:text-gray-300'
+  }`}
+>
+  <Heart size={16} className={liked ? 'fill-red-500' : ''} />
+</button>
       </div>
 
      

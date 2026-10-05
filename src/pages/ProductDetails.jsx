@@ -3,10 +3,13 @@ import { ArrowLeft, Star, ShoppingCart, Heart } from 'lucide-react';
 import products from '../data/products';
 import { useCart } from '../context/CartContext';
 import { formatCurrency } from '../utils/currency';
+import { useWishlist } from '../context/WishlistContext';
+
 
 function ProductDetails() {
   const { id } = useParams();
     const { addToCart } = useCart();
+    const { isWishlisted, toggleWishlist } = useWishlist();
 
   const product = products.find((item) => item.id === Number(id));
 
@@ -86,11 +89,14 @@ function ProductDetails() {
               Add to Cart
             </button>
             <button
-              aria-label="Add to wishlist"
-              className="flex h-12 w-12 items-center justify-center rounded-lg border border-gray-300 text-gray-600 hover:text-red-500 dark:border-dark-border dark:text-gray-300"
-            >
-              <Heart size={20} />
-            </button>
+  onClick={() => toggleWishlist(product)}
+  aria-label="Toggle wishlist"
+  className={`flex h-12 w-12 items-center justify-center rounded-lg border border-gray-300 hover:text-red-500 dark:border-dark-border ${
+    isWishlisted(product.id) ? 'text-red-500' : 'text-gray-600 dark:text-gray-300'
+  }`}
+>
+  <Heart size={20} className={isWishlisted(product.id) ? 'fill-red-500' : ''} />
+</button>
           </div>
         </div>
       </div>

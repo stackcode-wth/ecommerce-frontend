@@ -3,12 +3,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ShoppingBag, Search, Heart, ShoppingCart, Menu, X , User} from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
 import { useCart } from '../context/CartContext';
+import { useWishlist } from '../context/WishlistContext';
+
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchText, setSearchText] = useState('');
   const navigate = useNavigate();
   const { cartCount } = useCart();
+  const { wishlistCount } = useWishlist();
 
   const navLinks = [
     { label: 'Home', path: '/' },
@@ -71,12 +74,15 @@ function Navbar() {
           >
             <User size={22} />
           </Link>
-          <button
-            aria-label="Wishlist"
-            className="text-gray-700 hover:text-brand dark:text-gray-200"
-          >
-            <Heart size={22} />
-          </button>
+          
+          <Link to="/wishlist" aria-label="Wishlist" className="relative text-gray-700 hover:text-brand dark:text-gray-200">
+  <Heart size={22} />
+  {wishlistCount > 0 && (
+    <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-brand text-xs text-white">
+      {wishlistCount}
+    </span>
+  )}
+</Link>
 
           <Link
   to="/cart"
