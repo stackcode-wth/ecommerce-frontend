@@ -1,9 +1,11 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import coupons from '../data/coupons';
+import products from '../data/products';
 import { formatCurrency } from '../utils/currency';
 
 const CartContext = createContext();
 const LEGACY_USD_TO_INR_RATE = 83;
+const productImages = new Map(products.map((product) => [product.id, product.image]));
 
 export function CartProvider({ children }) {
   const [cartItems, setCartItems] = useState(() => {
@@ -11,12 +13,18 @@ export function CartProvider({ children }) {
     if (!savedCart) return [];
 
     const parsedCart = JSON.parse(savedCart);
-    if (localStorage.getItem('cartCurrency') === 'INR') return parsedCart;
+    const cartInCurrentCurrency =
+      localStorage.getItem('cartCurrency') === 'INR'
+        ? parsedCart
+        : parsedCart.map((item) => ({
+            ...item,
+            price: Math.round(item.price * LEGACY_USD_TO_INR_RATE * 100) / 100,
+            oldPrice: Math.round(item.oldPrice * LEGACY_USD_TO_INR_RATE * 100) / 100,
+          }));
 
-    return parsedCart.map((item) => ({
+    return cartInCurrentCurrency.map((item) => ({
       ...item,
-      price: Math.round(item.price * LEGACY_USD_TO_INR_RATE * 100) / 100,
-      oldPrice: Math.round(item.oldPrice * LEGACY_USD_TO_INR_RATE * 100) / 100,
+      image: productImages.get(item.id) ?? item.image,
     }));
   });
   const [appliedCoupon, setAppliedCoupon] = useState(null);

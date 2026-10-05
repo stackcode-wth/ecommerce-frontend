@@ -14,9 +14,14 @@ const liked = isWishlisted(product.id);
       <div className="relative">
         <Link
           to={`/products/${product.id}`}
-          className="flex h-40 items-center justify-center bg-brand-light/50 text-6xl dark:bg-dark-elevated"
+          className="flex h-40 items-center justify-center overflow-hidden bg-brand-light/50 dark:bg-dark-elevated"
         >
-          {product.image}
+          <img
+            src={product.image}
+            alt={product.name}
+            loading="lazy"
+            className="h-full w-full object-cover"
+          />
         </Link>
         <button
   onClick={() => toggleWishlist(product)}

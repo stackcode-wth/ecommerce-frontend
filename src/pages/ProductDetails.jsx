@@ -45,8 +45,12 @@ function ProductDetails() {
 
       <div className="mt-6 grid gap-8 md:grid-cols-2">
        
-        <div className="flex h-72 items-center justify-center rounded-2xl bg-brand-light/50 text-9xl md:h-96 dark:bg-dark-surface">
-          {product.image}
+        <div className="h-72 overflow-hidden rounded-2xl bg-brand-light/50 md:h-96 dark:bg-dark-surface">
+          <img
+            src={product.image}
+            alt={product.name}
+            className="h-full w-full object-cover"
+          />
         </div>
 
         <div>

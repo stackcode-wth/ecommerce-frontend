@@ -26,14 +26,14 @@ function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 bg-white shadow-sm dark:bg-dark-surface">
+    <nav className="sticky top-0 z-50 bg-brand text-white shadow-sm dark:bg-dark-surface">
       <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
        
         <Link
           to="/"
-          className="flex items-center gap-2 text-xl font-bold text-gray-900 dark:text-white"
+          className="flex items-center gap-2 text-xl font-bold text-white"
         >
-          <ShoppingBag size={26} className="text-brand" />
+          <ShoppingBag size={26} className="text-white" />
           M&M Shop
         </Link>
 
@@ -43,7 +43,7 @@ function Navbar() {
             <Link
               key={link.path}
               to={link.path}
-              className="text-gray-700 hover:text-brand dark:text-gray-200"
+              className="text-white/85 hover:text-white"
             >
               {link.label}
             </Link>
@@ -53,15 +53,15 @@ function Navbar() {
         
         <form
           onSubmit={handleSearch}
-          className="hidden md:flex items-center flex-1 max-w-xs rounded-full bg-stone-100 px-4 py-2 dark:bg-dark-elevated"
+          className="hidden md:flex items-center flex-1 max-w-xs rounded-full bg-white/15 px-4 py-2"
         >
-          <Search size={18} className="text-gray-500" />
+          <Search size={18} className="text-white/75" />
           <input
             type="text"
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
             placeholder="Search products..."
-            className="ml-2 w-full bg-transparent text-sm outline-none placeholder-gray-500 dark:text-white"
+            className="ml-2 w-full bg-transparent text-sm text-white outline-none placeholder-white/70"
           />
         </form>
 
@@ -70,15 +70,15 @@ function Navbar() {
           <Link
             to="/login"
             aria-label="Login"
-            className="text-gray-700 hover:text-brand dark:text-gray-200"
+            className="text-white/85 hover:text-white"
           >
             <User size={22} />
           </Link>
           
-          <Link to="/wishlist" aria-label="Wishlist" className="relative text-gray-700 hover:text-brand dark:text-gray-200">
+          <Link to="/wishlist" aria-label="Wishlist" className="relative text-white/85 hover:text-white">
   <Heart size={22} />
   {wishlistCount > 0 && (
-    <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-brand text-xs text-white">
+    <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-white text-xs text-brand">
       {wishlistCount}
     </span>
   )}
@@ -87,11 +87,11 @@ function Navbar() {
           <Link
   to="/cart"
   aria-label="Cart"
-  className="relative text-gray-700 hover:text-brand dark:text-gray-200"
+  className="relative text-white/85 hover:text-white"
 >
   <ShoppingCart size={22} />
   {cartCount > 0 && (
-    <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-brand text-xs text-white">
+    <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-white text-xs text-brand">
       {cartCount}
     </span>
   )}
@@ -102,7 +102,7 @@ function Navbar() {
           
           <button
             aria-label="Menu"
-            className="md:hidden text-gray-700 dark:text-gray-200"
+            className="md:hidden text-white/85 hover:text-white"
             onClick={() => setMenuOpen(!menuOpen)}
           >
             {menuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -112,13 +112,13 @@ function Navbar() {
 
       
       {menuOpen && (
-        <div className="md:hidden flex flex-col gap-3 border-t border-gray-200 px-4 py-3 dark:border-dark-border">
+        <div className="md:hidden flex flex-col gap-3 border-t border-white/30 px-4 py-3">
           {navLinks.map((link) => (
             <Link
               key={link.path}
               to={link.path}
               onClick={() => setMenuOpen(false)}
-              className="text-gray-700 hover:text-brand dark:text-gray-200"
+              className="text-white/85 hover:text-white"
             >
               {link.label}
             </Link>

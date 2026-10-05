@@ -37,8 +37,13 @@ function OfferBanner() {
           </Link>
         </div>
 
-        <div className="flex h-48 items-center justify-center rounded-2xl bg-white/60 text-8xl dark:bg-dark-elevated/60">
-          🛍️🌿
+        <div className="h-48 overflow-hidden rounded-2xl bg-white/60 md:h-56 dark:bg-dark-elevated/60">
+          <img
+            src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1200&q=85"
+            alt="Customers browsing a fashion sale"
+            loading="lazy"
+            className="h-full w-full object-cover"
+          />
         </div>
       </div>
     </section>

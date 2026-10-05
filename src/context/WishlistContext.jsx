@@ -1,11 +1,18 @@
 import { createContext, useContext, useEffect, useState } from 'react';
+import products from '../data/products';
 
 const WishlistContext = createContext();
+const productImages = new Map(products.map((product) => [product.id, product.image]));
 
 export function WishlistProvider({ children }) {
   const [wishlistItems, setWishlistItems] = useState(() => {
     const saved = localStorage.getItem('wishlist');
-    return saved ? JSON.parse(saved) : [];
+    return saved
+      ? JSON.parse(saved).map((item) => ({
+          ...item,
+          image: productImages.get(item.id) ?? item.image,
+        }))
+      : [];
   });
 
   useEffect(() => {

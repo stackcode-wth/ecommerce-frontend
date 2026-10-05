@@ -48,9 +48,13 @@ function Cart() {
             >
               <Link
                 to={`/products/${item.id}`}
-                className="flex h-20 w-20 shrink-0 items-center justify-center rounded-lg bg-brand-light/50 text-4xl dark:bg-dark-elevated"
+                className="h-20 w-20 shrink-0 overflow-hidden rounded-lg bg-brand-light/50 dark:bg-dark-elevated"
               >
-                {item.image}
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="h-full w-full object-cover"
+                />
               </Link>
 
               <div className="flex-1">

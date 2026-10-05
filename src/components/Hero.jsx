@@ -56,8 +56,12 @@ function Hero() {
           </div>
         </div>
 
-        <div className="flex h-64 items-center justify-center rounded-2xl bg-white/60 text-8xl md:h-80 dark:bg-dark-elevated/60">
-          🎒🎧
+        <div className="h-64 overflow-hidden rounded-2xl bg-white/60 md:h-80 dark:bg-dark-elevated/60">
+          <img
+            src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=85"
+            alt="A stylish retail store with a curated collection of products"
+            className="h-full w-full object-cover"
+          />
         </div>
       </div>
     </section>
