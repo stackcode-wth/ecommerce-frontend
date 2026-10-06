@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Phone, CircleHelp, ClipboardList, Truck, User, LogIn, X } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Phone, CircleHelp, ClipboardList, Truck, User, LogIn, LogOut, X } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 const menuItems = [
   { label: 'Contact Us', path: '/contact', icon: Phone },
@@ -14,6 +15,8 @@ const menuItems = [
 function AccountMenu() {
   const [open, setOpen] = useState(false);
   const menuRef = useRef(null);
+  const navigate = useNavigate();
+  const { user, isLoggedIn, logout } = useAuth();
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -24,6 +27,19 @@ function AccountMenu() {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
+  const visibleItems = isLoggedIn
+    ? menuItems.filter((item) => item.path !== '/login')
+    : menuItems;
+
+  const handleLogout = () => {
+    logout();
+    setOpen(false);
+    navigate('/');
+  };
+
+  const itemClass =
+    'flex w-full items-center gap-3 rounded-lg px-3 py-3 text-left text-gray-800 hover:bg-stone-100 dark:text-gray-100 dark:hover:bg-dark-elevated';
 
   return (
     <div className="relative" ref={menuRef}>
@@ -46,18 +62,29 @@ function AccountMenu() {
           </button>
 
           <ul className="flex flex-col pt-5">
-            {menuItems.map(({ label, path, icon: Icon }) => (
+            {isLoggedIn && (
+              <li className="px-3 pb-2 text-sm font-semibold text-gray-500 dark:text-gray-400">
+                Hi, {user.name}
+              </li>
+            )}
+
+            {visibleItems.map(({ label, path, icon: Icon }) => (
               <li key={path}>
-                <Link
-                  to={path}
-                  onClick={() => setOpen(false)}
-                  className="flex items-center gap-3 rounded-lg px-3 py-3 text-gray-800 hover:bg-stone-100 dark:text-gray-100 dark:hover:bg-dark-elevated"
-                >
+                <Link to={path} onClick={() => setOpen(false)} className={itemClass}>
                   <Icon size={20} className="text-brand" />
                   {label}
                 </Link>
               </li>
             ))}
+
+            {isLoggedIn && (
+              <li>
+                <button onClick={handleLogout} className={itemClass}>
+                  <LogOut size={20} className="text-brand" />
+                  Logout
+                </button>
+              </li>
+            )}
           </ul>
         </div>
       )}

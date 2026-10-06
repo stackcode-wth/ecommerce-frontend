@@ -1,11 +1,16 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import FormInput from '../components/FormInput';
+import { useAuth } from '../context/AuthContext';
 
 function Login() {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [errors, setErrors] = useState({});
-  const [submitted, setSubmitted] = useState(false);
+
+  const { login } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const redirectTo = location.state?.from || '/';
 
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
@@ -31,9 +36,9 @@ function Login() {
     setErrors(newErrors);
     if (Object.keys(newErrors).length > 0) return;
 
-    
-    console.log('Login (demo):', { email: formData.email });
-    setSubmitted(true);
+    // TODO: backend ready hone par yahan POST /api/auth/login call hoga
+    login({ name: formData.email.split('@')[0], email: formData.email });
+    navigate(redirectTo, { replace: true });
   };
 
   return (
@@ -73,12 +78,6 @@ function Login() {
             Login
           </button>
         </form>
-
-        {submitted && (
-          <p className="mt-4 rounded-lg bg-brand-light px-3 py-2 text-sm text-brand dark:bg-dark-elevated">
-            Demo only
-          </p>
-        )}
 
         <p className="mt-6 text-center text-sm text-gray-600 dark:text-gray-300">
           New here?{' '}
