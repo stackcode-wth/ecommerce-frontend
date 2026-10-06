@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import FormInput from '../components/FormInput';
+import { useAuth } from '../context/AuthContext';
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -10,7 +11,9 @@ function Register() {
     confirmPassword: '',
   });
   const [errors, setErrors] = useState({});
-  const [submitted, setSubmitted] = useState(false);
+
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
@@ -40,16 +43,11 @@ function Register() {
 
     const newErrors = validate();
     setErrors(newErrors);
-
-   
     if (Object.keys(newErrors).length > 0) return;
 
-  
-    console.log('Register (demo):', {
-      name: formData.name,
-      email: formData.email,
-    });
-    setSubmitted(true);
+    // TODO: backend ready hone par yahan POST /api/auth/register call hoga
+    login({ name: formData.name, email: formData.email });
+    navigate('/');
   };
 
   return (
@@ -106,13 +104,6 @@ function Register() {
             Register
           </button>
         </form>
-
-        {submitted && (
-          <p className="mt-4 rounded-lg bg-brand-light px-3 py-2 text-sm text-brand dark:bg-dark-elevated">
-            Demo only: the form is valid. Real registration will work once the
-            backend is connected.
-          </p>
-        )}
 
         <p className="mt-6 text-center text-sm text-gray-600 dark:text-gray-300">
           Already have an account?{' '}

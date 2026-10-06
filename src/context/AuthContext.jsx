@@ -18,8 +18,16 @@ export function AuthProvider({ children }) {
 
   const login = (userData) => setUser(userData);
   const logout = () => setUser(null);
+  const updateUser = (changes) =>
+    setUser((current) => ({ ...current, ...changes }));
 
-  const value = { user, isLoggedIn: user !== null, login, logout };
+  const value = {
+    user,
+    isLoggedIn: user !== null,
+    login,
+    logout,
+    updateUser,
+  };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

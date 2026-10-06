@@ -46,7 +46,7 @@ function AccountMenu() {
       <button
         onClick={() => setOpen(!open)}
         aria-label="Account menu"
-        className="text-gray-700 hover:text-brand dark:text-gray-200"
+        className="text-white/85 hover:text-white"
       >
         <User size={22} />
       </button>
