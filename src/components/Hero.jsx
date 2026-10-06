@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 
+
 function Hero() {
   const customers = ['A', 'R', 'S', 'M'];
 

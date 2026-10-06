@@ -4,6 +4,7 @@ import { ShoppingBag, Search, Heart, ShoppingCart, Menu, X , User} from 'lucide-
 import ThemeToggle from './ThemeToggle';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
+import AccountMenu from './AccountMenu';
 
 
 function Navbar() {
@@ -26,7 +27,7 @@ function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 bg-brand text-white shadow-sm dark:bg-dark-surface">
+    <nav className="sticky top-0 z-50 bg-brand text-white shadow-sm">
       <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
        
         <Link
@@ -67,13 +68,7 @@ function Navbar() {
 
 
         <div className="flex items-center gap-3">
-          <Link
-            to="/login"
-            aria-label="Login"
-            className="text-white/85 hover:text-white"
-          >
-            <User size={22} />
-          </Link>
+         <AccountMenu />
           
           <Link to="/wishlist" aria-label="Wishlist" className="relative text-white/85 hover:text-white">
   <Heart size={22} />

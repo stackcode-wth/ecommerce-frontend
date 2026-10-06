@@ -76,8 +76,7 @@ function Login() {
 
         {submitted && (
           <p className="mt-4 rounded-lg bg-brand-light px-3 py-2 text-sm text-brand dark:bg-dark-elevated">
-            Demo only: the form is valid. Real login will work once the backend
-            is connected.
+            Demo only
           </p>
         )}
 
