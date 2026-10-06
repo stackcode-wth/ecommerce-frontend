@@ -9,6 +9,9 @@ import Cart from './pages/Cart';
 import Wishlist from './pages/Wishlist';
 import Contact from './pages/Contact';
 import Help from './pages/Help';
+import FAQs from './pages/FAQs';
+import ReturnsRefunds from './pages/ReturnsRefunds';
+import ShippingPolicy from './pages/ShippingPolicy';
 import Orders from './pages/Orders';
 import TrackOrder from './pages/TrackOrder';
 import Profile from './pages/Profile';
@@ -30,6 +33,9 @@ function App() {
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/help" element={<Help />} />
+          <Route path="/faqs" element={<FAQs />} />
+          <Route path="/returns-refunds" element={<ReturnsRefunds />} />
+          <Route path="/shipping-policy" element={<ShippingPolicy />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
 
