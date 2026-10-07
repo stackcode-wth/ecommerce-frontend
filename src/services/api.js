@@ -17,7 +17,14 @@ async function request(path, options = {}) {
     throw new Error(body.message || `Request failed (${response.status})`);
   }
 
-  return response.status === 204 ? null : response.json();
+  if (response.status === 204) return null;
+
+  const responseBody = await response.text();
+  if (!responseBody) return null;
+
+  return response.headers.get('content-type')?.includes('application/json')
+    ? JSON.parse(responseBody)
+    : responseBody;
 }
 
 // Backend ka product frontend ke format me badalta hai
@@ -33,4 +40,44 @@ export async function getProducts() {
 export async function getProduct(id) {
   const data = await request(`/api/products/${id}`);
   return normalizeProduct(data);
+}
+
+export async function loginWithCredentials(email, password) {
+  const data = await request('/api/auth/login', {
+    method: 'POST',
+    body: JSON.stringify({ email, password }),
+  });
+
+  if (typeof data?.token !== 'string' || data.token.trim() === '') {
+    throw new Error('The login response did not include an authentication token.');
+  }
+
+  return data;
+}
+
+export async function registerWithCredentials(name, email, password) {
+  return request('/api/auth/register', {
+    method: 'POST',
+    body: JSON.stringify({ name, email, password }),
+  });
+}
+
+export async function syncCartWithBackend(cartItems) {
+  await request('/api/cart', { method: 'DELETE' });
+
+  for (const item of cartItems) {
+    const params = new URLSearchParams({
+      productId: item.id,
+      quantity: String(item.quantity),
+    });
+    await request(`/api/cart?${params}`, { method: 'POST' });
+  }
+}
+
+export async function createOrder() {
+  return request('/api/orders', { method: 'POST' });
+}
+
+export async function getMyOrders() {
+  return request('/api/orders');
 }

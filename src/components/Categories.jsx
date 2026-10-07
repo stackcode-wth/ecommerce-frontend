@@ -56,12 +56,12 @@ function Categories() {
             to={`/products?category=${encodeURIComponent(name)}`}
             className="flex flex-col items-center gap-3"
           >
-            <span className="h-20 w-20 overflow-hidden rounded-full bg-brand-light sm:h-24 sm:w-24 dark:bg-dark-elevated">
+            <span className="h-20 w-20 rounded-full bg-accent p-1 sm:h-24 sm:w-24">
               <img
                 src={image}
                 alt={`${name} category`}
                 loading="lazy"
-                className="h-full w-full object-cover"
+                className="h-full w-full rounded-full object-cover"
               />
             </span>
             <span className="text-center text-sm font-medium text-gray-800 dark:text-gray-200">

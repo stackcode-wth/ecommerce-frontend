@@ -16,8 +16,14 @@ export function AuthProvider({ children }) {
     }
   }, [user]);
 
-  const login = (userData) => setUser(userData);
-  const logout = () => setUser(null);
+  const login = (userData, token) => {
+    if (token) localStorage.setItem('token', token);
+    setUser(userData);
+  };
+  const logout = () => {
+    localStorage.removeItem('token');
+    setUser(null);
+  };
   const updateUser = (changes) =>
     setUser((current) => ({ ...current, ...changes }));
 

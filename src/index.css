@@ -5,14 +5,16 @@
 
 /* Our brand colors. Tailwind creates bg-brand, text-brand, etc. from these */
 @theme {
-  --color-brand: #6b7f3a;
-  --color-brand-dark: #556630;
-  --color-brand-light: #eef2e3;
-  --color-cream: #f6f1e7;
-  --color-card-light: #e8eedb;
-  --color-dark-bg: #0b100c;
-  --color-dark-surface: #151f17;
-  --color-dark-elevated: #202d22;
-  --color-dark-hover: #2d3c2f;
-  --color-dark-border: #3a4b3c;
+  --color-brand: #164a41;
+  --color-brand-dark: #123a34;
+  --color-brand-light: #9dc88d;
+  --color-brand-secondary: #4d774e;
+  --color-accent: #f1b24a;
+  --color-cream: #f7faf6;
+  --color-card-light: #f1f6ef;
+  --color-dark-bg: #091b18;
+  --color-dark-surface: #0e2924;
+  --color-dark-elevated: #164a41;
+  --color-dark-hover: #245d51;
+  --color-dark-border: #315c50;
 }

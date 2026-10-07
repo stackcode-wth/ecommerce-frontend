@@ -64,7 +64,7 @@ function ProductDetails() {
           </h1>
 
           <div className="mt-3 flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
-            <Star size={16} className="fill-yellow-400 text-yellow-400" />
+            <Star size={16} className="fill-accent text-accent" />
             <span className="font-medium text-gray-800 dark:text-gray-200">
               {product.rating}
             </span>

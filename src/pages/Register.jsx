@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import FormInput from '../components/FormInput';
-import { useAuth } from '../context/AuthContext';
+import { registerWithCredentials } from '../services/api';
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -11,12 +11,19 @@ function Register() {
     confirmPassword: '',
   });
   const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
 
-  const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
+    setErrors((currentErrors) => ({
+      ...currentErrors,
+      [event.target.name]: undefined,
+      submit: undefined,
+    }));
+    setSuccessMessage('');
   };
 
   const validate = () => {
@@ -38,16 +45,29 @@ function Register() {
     return newErrors;
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     const newErrors = validate();
     setErrors(newErrors);
     if (Object.keys(newErrors).length > 0) return;
 
-    // TODO: backend ready hone par yahan POST /api/auth/register call hoga
-    login({ name: formData.name, email: formData.email });
-    navigate('/');
+    setIsSubmitting(true);
+    try {
+      await registerWithCredentials(
+        formData.name.trim(),
+        formData.email.trim(),
+        formData.password,
+      );
+      setSuccessMessage('Account created successfully. Please log in.');
+    } catch (error) {
+      setErrors((currentErrors) => ({
+        ...currentErrors,
+        submit: error.message || 'Unable to create your account. Please try again.',
+      }));
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -61,6 +81,19 @@ function Register() {
         </p>
 
         <form onSubmit={handleSubmit} noValidate className="mt-6 space-y-4">
+          {errors.submit && (
+            <p role="alert" className="text-sm text-red-600">
+              {errors.submit}
+            </p>
+          )}
+          {successMessage && (
+            <p role="status" className="text-sm text-green-700">
+              {successMessage}{' '}
+              <Link to="/login" className="font-medium underline">
+                Log in
+              </Link>
+            </p>
+          )}
           <FormInput
             label="Full name"
             name="name"
@@ -99,9 +132,10 @@ function Register() {
 
           <button
             type="submit"
+            disabled={isSubmitting}
             className="w-full rounded-lg bg-brand py-3 font-medium text-white hover:bg-brand-dark"
           >
-            Register
+            {isSubmitting ? 'Creating account...' : 'Register'}
           </button>
         </form>
 

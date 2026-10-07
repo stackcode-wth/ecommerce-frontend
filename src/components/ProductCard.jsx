@@ -43,7 +43,7 @@ const liked = isWishlisted(product.id);
         </h3>
 
         <div className="mt-1 flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400">
-          <Star size={14} className="fill-yellow-400 text-yellow-400" />
+          <Star size={14} className="fill-accent text-accent" />
           <span className="font-medium text-gray-800 dark:text-gray-200">
             {product.rating}
           </span>

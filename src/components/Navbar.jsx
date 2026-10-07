@@ -27,7 +27,7 @@ function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 bg-brand text-white shadow-sm">
+    <nav className="sticky top-0 z-50 bg-brand text-white shadow-sm dark:bg-dark-bg">
       <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
        
         <Link

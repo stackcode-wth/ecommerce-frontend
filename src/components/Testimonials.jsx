@@ -60,7 +60,7 @@ function Testimonials() {
                     size={14}
                     className={
                       starNumber <= testimonial.rating
-                        ? 'fill-yellow-400 text-yellow-400'
+                        ? 'fill-accent text-accent'
                         : 'text-gray-300 dark:text-gray-600'
                     }
                   />

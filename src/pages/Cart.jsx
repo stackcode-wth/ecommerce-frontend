@@ -1,16 +1,46 @@
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { Minus, Plus, Trash2, ShoppingCart } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import CouponBox from '../components/CouponBox';
 import { formatCurrency } from '../utils/currency';
+import { createOrder, syncCartWithBackend } from '../services/api';
 
 function Cart() {
-  const { cartItems, updateQuantity, removeFromCart, subtotal, discount } = useCart();
+  const {
+    cartItems,
+    updateQuantity,
+    removeFromCart,
+    clearCart,
+    subtotal,
+    discount,
+  } = useCart();
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
+  const [checkoutError, setCheckoutError] = useState('');
+  const navigate = useNavigate();
 
- 
   const shipping = subtotal > 4150 ? 0 : 415;
-    const total = subtotal - discount + shipping;
+  const total = subtotal - discount + shipping;
 
+  const handleCheckout = async () => {
+    if (!localStorage.getItem('token')) {
+      navigate('/login', { state: { from: '/cart' } });
+      return;
+    }
+
+    setCheckoutError('');
+    setIsCheckingOut(true);
+    try {
+      await syncCartWithBackend(cartItems);
+      const order = await createOrder();
+      clearCart();
+      navigate('/orders', { state: { placedOrder: order } });
+    } catch (error) {
+      setCheckoutError(error.message || 'Unable to place your order. Please try again.');
+    } finally {
+      setIsCheckingOut(false);
+    }
+  };
 
   if (cartItems.length === 0) {
     return (
@@ -137,8 +167,18 @@ function Cart() {
           </div>
 
           
-          <button className="mt-5 w-full rounded-lg bg-brand py-3 font-medium text-white hover:bg-brand-dark">
-            Proceed to Checkout
+          {checkoutError && (
+            <p role="alert" className="mt-4 text-sm text-red-600">
+              {checkoutError}
+            </p>
+          )}
+          <button
+            type="button"
+            onClick={handleCheckout}
+            disabled={isCheckingOut}
+            className="mt-5 w-full rounded-lg bg-brand py-3 font-medium text-white hover:bg-brand-dark disabled:cursor-wait disabled:opacity-60"
+          >
+            {isCheckingOut ? 'Placing order...' : 'Proceed to Checkout'}
           </button>
 
           <Link

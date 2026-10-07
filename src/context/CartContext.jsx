@@ -66,6 +66,11 @@ export function CartProvider({ children }) {
     );
   };
 
+  const clearCart = () => {
+    setCartItems([]);
+    setAppliedCoupon(null);
+  };
+
   
   const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
   const subtotal = cartItems.reduce(
@@ -110,6 +115,7 @@ export function CartProvider({ children }) {
     addToCart,
     updateQuantity,
     removeFromCart,
+    clearCart,
     cartCount,
     subtotal,
     appliedCoupon,
