@@ -1,14 +1,7 @@
 
 const products = [
   {
-    id: 1,
-    name: 'Smart Watch Series 5',
-    category: 'Electronics',
-    price: 7469.17,
-    oldPrice: 10789.17,
-    rating: 4.5,
-    reviews: 128,
-    image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80',
+     image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80',
     description: 'Track your steps, heart rate and sleep with a bright display and a battery that lasts for days.',
   },
   {
