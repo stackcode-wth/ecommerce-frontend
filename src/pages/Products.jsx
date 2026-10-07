@@ -1,7 +1,6 @@
 import { Link, useSearchParams } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
-import products from '../data/products';
-
+import { useProducts } from '../hooks/useProducts';
 
 const categoryNames = [
   'Electronics',
@@ -20,11 +19,12 @@ const chipInactive =
 
 function Products() {
   const [searchParams, setSearchParams] = useSearchParams();
+  const { products, loading, error } = useProducts();
+
   const selectedCategory = searchParams.get('category');
   const searchText = searchParams.get('search') || '';
   const sortBy = searchParams.get('sort') || 'featured';
 
-  
   const updateParam = (key, value) => {
     const newParams = new URLSearchParams(searchParams);
     if (value) {
@@ -35,7 +35,31 @@ function Products() {
     setSearchParams(newParams);
   };
 
-  
+  if (loading) {
+    return (
+      <div className="max-w-6xl mx-auto px-4 py-10 text-center text-gray-600 dark:text-gray-300">
+        <p>Loading products...</p>
+        <p className="mt-1 text-sm text-gray-400">
+          The server may take up to a minute to wake up.
+        </p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="max-w-6xl mx-auto px-4 py-10 text-center">
+        <p className="text-red-500">Could not load products: {error}</p>
+        <button
+          onClick={() => window.location.reload()}
+          className="mt-4 rounded-lg bg-brand px-5 py-2 text-white hover:bg-brand-dark"
+        >
+          Try again
+        </button>
+      </div>
+    );
+  }
+
   const filteredProducts = products.filter((product) => {
     const matchesCategory =
       !selectedCategory || product.category === selectedCategory;
@@ -46,7 +70,6 @@ function Products() {
     return matchesCategory && matchesSearch;
   });
 
-  
   const sortedProducts = [...filteredProducts];
   if (sortBy === 'price-low') {
     sortedProducts.sort((a, b) => a.price - b.price);
@@ -87,7 +110,6 @@ function Products() {
         )}
       </div>
 
-      
       <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
         <div className="flex gap-2 overflow-x-auto pb-1">
           <button

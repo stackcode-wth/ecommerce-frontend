@@ -1,19 +1,25 @@
 import { Link, useParams } from 'react-router-dom';
 import { ArrowLeft, Star, ShoppingCart, Heart } from 'lucide-react';
-import products from '../data/products';
+import { useProduct } from '../hooks/useProducts';
 import { useCart } from '../context/CartContext';
-import { formatCurrency } from '../utils/currency';
 import { useWishlist } from '../context/WishlistContext';
-
+import { formatCurrency } from '../utils/currency';
 
 function ProductDetails() {
   const { id } = useParams();
-    const { addToCart } = useCart();
-    const { isWishlisted, toggleWishlist } = useWishlist();
+  const { addToCart } = useCart();
+  const { isWishlisted, toggleWishlist } = useWishlist();
+  const { product, loading, error } = useProduct(id);
 
-  const product = products.find((item) => item.id === Number(id));
+  if (loading) {
+    return (
+      <div className="max-w-6xl mx-auto px-4 py-10 text-center text-gray-600 dark:text-gray-300">
+        Loading product...
+      </div>
+    );
+  }
 
-  if (!product) {
+  if (error || !product) {
     return (
       <div className="max-w-6xl mx-auto px-4 py-10 text-center">
         <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
@@ -29,9 +35,11 @@ function ProductDetails() {
     );
   }
 
-  const discountPercent = Math.round(
-    ((product.oldPrice - product.price) / product.oldPrice) * 100
-  );
+  const hasDiscount = product.oldPrice > product.price;
+  const discountPercent = hasDiscount
+    ? Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100)
+    : 0;
+  const liked = isWishlisted(product.id);
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-6">
@@ -40,17 +48,12 @@ function ProductDetails() {
         className="inline-flex items-center gap-1 text-sm text-gray-600 hover:text-brand dark:text-gray-300"
       >
         <ArrowLeft size={16} />
-       Back
+        Back
       </Link>
 
       <div className="mt-6 grid gap-8 md:grid-cols-2">
-       
-        <div className="h-72 overflow-hidden rounded-2xl bg-brand-light/50 md:h-96 dark:bg-dark-surface">
-          <img
-            src={product.image}
-            alt={product.name}
-            className="h-full w-full object-cover"
-          />
+        <div className="flex h-72 items-center justify-center rounded-2xl bg-brand-light/50 text-9xl md:h-96 dark:bg-dark-surface">
+          {product.image}
         </div>
 
         <div>
@@ -72,12 +75,16 @@ function ProductDetails() {
             <span className="text-3xl font-bold text-gray-900 dark:text-white">
               {formatCurrency(product.price)}
             </span>
-            <span className="text-lg text-gray-400 line-through">
-              {formatCurrency(product.oldPrice)}
-            </span>
-            <span className="rounded-full bg-brand-light px-2 py-1 text-xs font-semibold text-brand">
-              {discountPercent}% OFF
-            </span>
+            {hasDiscount && (
+              <>
+                <span className="text-lg text-gray-400 line-through">
+                  {formatCurrency(product.oldPrice)}
+                </span>
+                <span className="rounded-full bg-brand-light px-2 py-1 text-xs font-semibold text-brand">
+                  {discountPercent}% OFF
+                </span>
+              </>
+            )}
           </div>
 
           <p className="mt-6 text-gray-600 dark:text-gray-300">
@@ -85,22 +92,22 @@ function ProductDetails() {
           </p>
 
           <div className="mt-8 flex gap-3">
-            
-            <button 
-            onClick={() => addToCart(product)}
-            className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-brand py-3 font-medium text-white hover:bg-brand-dark">
+            <button
+              onClick={() => addToCart(product)}
+              className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-brand py-3 font-medium text-white hover:bg-brand-dark"
+            >
               <ShoppingCart size={18} />
               Add to Cart
             </button>
             <button
-  onClick={() => toggleWishlist(product)}
-  aria-label="Toggle wishlist"
-  className={`flex h-12 w-12 items-center justify-center rounded-lg border border-gray-300 hover:text-red-500 dark:border-dark-border ${
-    isWishlisted(product.id) ? 'text-red-500' : 'text-gray-600 dark:text-gray-300'
-  }`}
->
-  <Heart size={20} className={isWishlisted(product.id) ? 'fill-red-500' : ''} />
-</button>
+              onClick={() => toggleWishlist(product)}
+              aria-label="Toggle wishlist"
+              className={`flex h-12 w-12 items-center justify-center rounded-lg border border-gray-300 hover:text-red-500 dark:border-dark-border ${
+                liked ? 'text-red-500' : 'text-gray-600 dark:text-gray-300'
+              }`}
+            >
+              <Heart size={20} className={liked ? 'fill-red-500' : ''} />
+            </button>
           </div>
         </div>
       </div>
