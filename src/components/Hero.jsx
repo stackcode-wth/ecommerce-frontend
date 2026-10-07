@@ -26,7 +26,7 @@ function Hero() {
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
               to="/products"
-              className="inline-flex items-center gap-2 rounded-lg bg-brand px-6 py-3 font-medium text-white hover:bg-brand-dark"
+              className="inline-flex items-center gap-2 rounded-lg bg-accent px-6 py-3 font-medium text-dark-bg hover:bg-accent/90"
             >
               Shop Now <ArrowRight size={18} />
             </Link>

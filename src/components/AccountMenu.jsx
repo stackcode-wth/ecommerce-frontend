@@ -45,10 +45,13 @@ function AccountMenu() {
     <div className="relative" ref={menuRef}>
       <button
         onClick={() => setOpen(!open)}
-        aria-label="Account menu"
-        className="text-white/85 hover:text-white"
+        aria-label={isLoggedIn ? `Account menu for ${user.name}` : 'Account menu'}
+        className="flex items-center gap-2 whitespace-nowrap text-white/85 hover:text-white"
       >
         <User size={22} />
+        {isLoggedIn && (
+          <span className="hidden text-sm sm:inline">Hello, {user.name}</span>
+        )}
       </button>
 
       {open && (

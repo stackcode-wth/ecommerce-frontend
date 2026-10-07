@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import SaleAnnouncement from './components/SaleAnnouncement';
 import Footer from './components/Footer';
 import ProtectedRoute from './components/ProtectedRoute';
 import Home from './pages/Home';
@@ -23,6 +24,7 @@ function App() {
   return (
     <div className="min-h-screen flex flex-col bg-cream text-gray-800 dark:bg-dark-bg dark:text-gray-100">
       <Navbar />
+      <SaleAnnouncement />
 
       <main className="flex-1">
         <Routes>

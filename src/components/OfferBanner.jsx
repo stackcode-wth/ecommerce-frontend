@@ -5,7 +5,7 @@ function OfferBanner() {
   return (
     <section
       id="offers"
-      className="overflow-hidden rounded-2xl bg-cream dark:bg-dark-surface"
+      className="overflow-hidden rounded-2xl bg-[#fff9e8] dark:bg-dark-surface"
     >
       <div className="grid items-center gap-6 px-6 py-10 md:grid-cols-2 md:px-12">
      
