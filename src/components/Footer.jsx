@@ -6,6 +6,7 @@ const quickLinks = [
   { label: 'Home', path: '/' },
   { label: 'Shop', path: '/products' },
   { label: 'Categories', path: '/products' },
+  { label: 'About Us', path: '/about' },
 ];
 
 const serviceLinks = [
@@ -100,7 +101,9 @@ function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 border-t border-gray-300 pt-4 text-center text-sm text-gray-500 dark:border-dark-border dark:text-gray-400">
+      </div>
+      <div className="bg-brand text-white dark:bg-dark-bg">
+        <div className="mx-auto max-w-6xl border-t border-white/20 px-4 py-4 text-center text-sm text-white/80">
           &copy; {new Date().getFullYear()} M&M Shop. All rights reserved.
         </div>
       </div>

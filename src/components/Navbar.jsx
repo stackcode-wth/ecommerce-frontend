@@ -17,6 +17,7 @@ function Navbar() {
   const navLinks = [
     { label: 'Home', path: '/' },
     { label: 'Products', path: '/products' },
+    { label: 'About Us', path: '/about' },
   ];
 
   const handleSearch = (event) => {

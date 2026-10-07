@@ -19,6 +19,7 @@ import Profile from './pages/Profile';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import NotFound from './pages/NotFound';
+import About from './pages/About';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/about" element={<About />} />
           <Route path="/help" element={<Help />} />
           <Route path="/faqs" element={<FAQs />} />
           <Route path="/returns-refunds" element={<ReturnsRefunds />} />
