@@ -10,7 +10,9 @@ function OfferBanner() {
       <div className="grid items-center gap-6 px-6 py-10 md:grid-cols-2 md:px-12">
      
         <div>
-          <p className="text-sm font-medium text-brand">Special Offer</p>
+          <p className="inline-flex rounded-full px-3 py-1 text-sm font-medium text-brand dark:bg-accent dark:text-dark-bg">
+            Special Offer
+          </p>
 
           <h2 className="mt-2 text-4xl font-bold text-gray-900 md:text-5xl dark:text-white">
             Up to 50% Off
@@ -23,7 +25,7 @@ function OfferBanner() {
 
           <p className="mt-4 text-sm text-gray-700 dark:text-gray-200">
             Use code{' '}
-            <span className="rounded border border-dashed border-brand bg-white px-2 py-1 font-mono font-semibold text-brand dark:bg-dark-elevated">
+            <span className="rounded border border-dashed border-brand bg-white px-2 py-1 font-mono font-semibold text-brand dark:border-accent dark:bg-accent dark:text-dark-bg">
               SAVE10
             </span>{' '}
             at checkout

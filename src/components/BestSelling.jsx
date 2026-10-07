@@ -15,7 +15,7 @@ function BestSelling() {
         </h2>
         <Link
           to="/products"
-          className="flex items-center gap-1 text-sm font-medium text-brand hover:underline"
+          className="flex items-center gap-1 text-sm font-medium text-brand hover:underline dark:text-accent"
         >
           View All Products <ArrowRight size={16} />
         </Link>

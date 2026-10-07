@@ -4,7 +4,7 @@ function SaleAnnouncement() {
   return (
     <aside
       aria-label="Current promotion"
-      className="bg-dark-bg px-4 py-2 text-white dark:bg-dark-surface"
+      className="bg-dark-bg px-4 py-2 text-white dark:bg-black"
     >
       <div className="mx-auto flex max-w-6xl items-center justify-center gap-2.5 text-center text-xs sm:gap-3 sm:text-sm">
         <span className="shrink-0 rounded bg-accent px-2 py-1 text-[10px] font-bold tracking-wide text-dark-bg sm:text-xs">

@@ -35,7 +35,7 @@ function Testimonials() {
             key={testimonial.id}
             className="rounded-xl border border-gray-200 bg-card-light p-5 dark:border-dark-border dark:bg-dark-surface"
           >
-            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-brand-light text-brand dark:bg-dark-elevated">
+            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-brand-light text-brand dark:bg-accent dark:text-dark-bg">
               <Quote size={18} />
             </span>
 
