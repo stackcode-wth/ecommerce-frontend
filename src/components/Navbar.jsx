@@ -1,6 +1,17 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ShoppingBag, Search, Heart, ShoppingCart, Menu, X , User} from 'lucide-react';
+import {
+  ShoppingBag,
+  Search,
+  Heart,
+  ShoppingCart,
+  Menu,
+  X,
+  Phone,
+  CircleHelp,
+  ClipboardList,
+  Truck,
+} from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
@@ -18,6 +29,13 @@ function Navbar() {
     { label: 'Home', path: '/' },
     { label: 'Products', path: '/products' },
     { label: 'About Us', path: '/about' },
+  ];
+
+  const supportLinks = [
+    { label: 'Contact Us', path: '/contact', icon: Phone },
+    { label: 'Help & Support', path: '/help', icon: CircleHelp },
+    { label: 'My Orders', path: '/orders', icon: ClipboardList },
+    { label: 'Track Order', path: '/track-order', icon: Truck },
   ];
 
   const handleSearch = (event) => {
@@ -112,6 +130,21 @@ function Navbar() {
         </div>
       </div>
 
+      <div className="hidden border-t border-white/10 md:block">
+        <div className="mx-auto flex max-w-6xl items-center justify-center gap-8 px-4 py-2">
+          {supportLinks.map(({ label, path, icon: Icon }) => (
+            <Link
+              key={path}
+              to={path}
+              className="inline-flex items-center gap-2 text-sm text-white/80 transition-colors hover:text-accent"
+            >
+              <Icon size={16} aria-hidden="true" />
+              {label}
+            </Link>
+          ))}
+        </div>
+      </div>
+
       
       {menuOpen && (
         <div className="md:hidden flex flex-col gap-3 border-t border-white/30 px-4 py-3">
@@ -123,6 +156,18 @@ function Navbar() {
               className="text-white/85 hover:text-white"
             >
               {link.label}
+            </Link>
+          ))}
+          <div className="my-1 border-t border-white/20" />
+          {supportLinks.map(({ label, path, icon: Icon }) => (
+            <Link
+              key={path}
+              to={path}
+              onClick={() => setMenuOpen(false)}
+              className="flex items-center gap-3 py-1 text-white/85 hover:text-accent"
+            >
+              <Icon size={18} aria-hidden="true" />
+              {label}
             </Link>
           ))}
         </div>

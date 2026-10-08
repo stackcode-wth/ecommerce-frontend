@@ -1,13 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Phone, CircleHelp, ClipboardList, Truck, User, LogIn, LogOut, X } from 'lucide-react';
+import { User, LogIn, LogOut, X } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 const menuItems = [
-  { label: 'Contact Us', path: '/contact', icon: Phone },
-  { label: 'Help & Support', path: '/help', icon: CircleHelp },
-  { label: 'My Orders', path: '/orders', icon: ClipboardList },
-  { label: 'Track Order', path: '/track-order', icon: Truck },
   { label: 'My Profile', path: '/profile', icon: User },
   { label: 'Login', path: '/login', icon: LogIn },
 ];
