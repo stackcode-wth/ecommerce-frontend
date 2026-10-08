@@ -1,16 +1,49 @@
-# React + Vite
+# 🛍️ M&M Shop
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive e-commerce web app built with **React** and a **Spring Boot + MongoDB** backend.
 
-Currently, two official plugins are available:
+🔗 **Live Demo:** [ecommerce-frontend-amber-sigma.vercel.app](https://ecommerce-frontend-amber-sigma.vercel.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+> The backend runs on a free Render instance, so the first request after inactivity may take 30–60 seconds.
 
-## React Compiler
+## ✨ Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Landing page for visitors and a full store experience after login
+- Register / Login with JWT authentication and protected routes
+- Product catalogue with search, category filters and sorting
+- Cart with coupon codes, wishlist and checkout
+- Order history and order tracking
+- Dark mode and fully responsive design
 
-## Expanding the ESLint configuration
+## 🧰 Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+| Layer | Technologies |
+|-------|--------------|
+| Frontend | React 19, Vite, Tailwind CSS 4, React Router 7, Lucide Icons |
+| State | React Context API, localStorage |
+| Backend | Spring Boot, MongoDB, JWT (separate repo) |
+| Hosting | Vercel (frontend), Render (backend) |
+
+
+## 📜 Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start the dev server |
+| `npm run build` | Create a production build |
+| `npm run preview` | Preview the production build |
+| `npm run lint` | Run ESLint |
+
+## 📁 Project Structure
+
+```
+src/
+├── components/   # Reusable UI (navbar, layout, route guards, cards)
+├── context/      # Auth, Cart and Wishlist state
+├── hooks/        # Data-fetching hooks
+├── pages/        # One file per route
+├── services/     # API calls (api.js)
+├── data/         # Static data (coupons, FAQs)
+└── utils/        # Helpers
+```
+

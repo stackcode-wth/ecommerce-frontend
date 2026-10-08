@@ -78,10 +78,10 @@ function Contact() {
           <div>
             <span className="inline-flex items-center gap-2 rounded-full bg-white/80 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-brand dark:bg-dark-elevated dark:text-accent">
               <Headphones size={14} aria-hidden="true" />
-              We’re happy to help
+              We are happy to help
             </span>
             <h1 className="mt-5 max-w-xl text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-5xl">
-              Let’s get in <span className="text-brand dark:text-accent">touch</span>
+              Lets get in <span className="text-brand dark:text-accent">touch</span>
             </h1>
             <p className="mt-4 max-w-xl text-base leading-7 text-gray-600 dark:text-gray-300 sm:text-lg">
               Have a question about an order or need a hand? Send us a message and our team will get back to you.
@@ -96,7 +96,7 @@ function Contact() {
               Send us a message
             </h2>
             <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-300">
-              Fill out the form below with a few details, and we’ll be in touch.
+              Fill out the form below with a few details, and we will be in touch.
             </p>
             <div className="mt-5 flex items-center gap-2 text-sm font-medium text-brand dark:text-accent">
               <Clock size={16} aria-hidden="true" />
@@ -112,7 +112,7 @@ function Contact() {
             Contact details
           </p>
           <h2 className="mt-2 text-2xl font-bold text-gray-900 dark:text-white">
-            We’re here for you
+            We are here for you
           </h2>
           <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-300">
             Reach out through any of the options below, or send us a message using the form.
