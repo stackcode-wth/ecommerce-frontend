@@ -81,3 +81,43 @@ export async function createOrder() {
 export async function getMyOrders() {
   return request('/api/orders');
 }
+
+export async function getWishlist() {
+  return request('/api/wishlist');
+}
+
+export async function addWishlistItem(productId) {
+  return request(`/api/wishlist/${encodeURIComponent(productId)}`, {
+    method: 'POST',
+  });
+}
+
+export async function removeWishlistItem(productId) {
+  return request(`/api/wishlist/${encodeURIComponent(productId)}`, {
+    method: 'DELETE',
+  });
+}
+
+export async function getProductReviews(productId) {
+  return request(`/api/reviews/${encodeURIComponent(productId)}`);
+}
+
+export async function createProductReview(productId, review) {
+  return request(`/api/reviews/${encodeURIComponent(productId)}`, {
+    method: 'POST',
+    body: JSON.stringify(review),
+  });
+}
+
+export async function updateProductReview(reviewId, review) {
+  return request(`/api/reviews/${encodeURIComponent(reviewId)}`, {
+    method: 'PUT',
+    body: JSON.stringify(review),
+  });
+}
+
+export async function deleteProductReview(reviewId) {
+  return request(`/api/reviews/${encodeURIComponent(reviewId)}`, {
+    method: 'DELETE',
+  });
+}

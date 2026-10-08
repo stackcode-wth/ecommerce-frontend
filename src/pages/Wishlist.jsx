@@ -2,9 +2,11 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Heart, ShieldCheck, ShoppingBag } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
 import { useWishlist } from '../context/WishlistContext';
+import { useAuth } from '../context/AuthContext';
 
 function Wishlist() {
-  const { wishlistItems } = useWishlist();
+  const { wishlistItems, wishlistError, isLoadingWishlist } = useWishlist();
+  const { isLoggedIn } = useAuth();
 
   return (
     <main className="mx-auto w-full max-w-6xl px-4 py-8 sm:py-12">
@@ -45,7 +47,17 @@ function Wishlist() {
         </div>
       </section>
 
-      {wishlistItems.length === 0 ? (
+      {wishlistError && (
+        <p role="alert" className="mt-6 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700 dark:border-red-900/60 dark:bg-red-950/30 dark:text-red-300">
+          {wishlistError}
+        </p>
+      )}
+
+      {isLoadingWishlist ? (
+        <p role="status" className="mt-8 rounded-2xl border border-gray-200 bg-white p-6 text-sm text-gray-600 dark:border-dark-border dark:bg-dark-surface dark:text-gray-300">
+          Loading your saved favorites...
+        </p>
+      ) : wishlistItems.length === 0 ? (
         <section className="mt-8 rounded-2xl border border-gray-200/80 bg-white px-6 py-10 dark:border-dark-border dark:bg-dark-surface sm:py-12">
           <div className="mx-auto flex max-w-lg flex-col items-center text-center">
             <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-light/50 text-brand dark:bg-accent/15 dark:text-accent">
@@ -94,7 +106,9 @@ function Wishlist() {
           <ShieldCheck size={19} aria-hidden="true" />
         </span>
         <p className="text-sm leading-6 text-gray-600 dark:text-gray-300">
-          Your wishlist stays saved on this device, so it’s easy to pick up where you left off.
+          {isLoggedIn
+            ? 'Your wishlist is synced with your account, so your saved favorites are ready when you return.'
+            : 'Your wishlist is saved on this device. Sign in to sync favorites with your account.'}
         </p>
       </aside>
     </main>

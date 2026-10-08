@@ -6,8 +6,8 @@ import { useWishlist } from '../context/WishlistContext';
 
 function ProductCard({ product }) {
   const { addToCart } = useCart();
-  const { isWishlisted, toggleWishlist } = useWishlist();
-const liked = isWishlisted(product.id);
+  const { isWishlisted, toggleWishlist, isWishlistUpdating, wishlistError } = useWishlist();
+  const liked = isWishlisted(product.id);
   return (
     <div className="flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-card-light dark:border-dark-border dark:bg-dark-surface">
    
@@ -25,8 +25,9 @@ const liked = isWishlisted(product.id);
         </Link>
         <button
   onClick={() => toggleWishlist(product)}
+  disabled={isWishlistUpdating(product.id)}
   aria-label={liked ? 'Remove from wishlist' : 'Add to wishlist'}
-  className={`absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-white shadow-sm hover:text-red-500 dark:bg-dark-surface ${
+  className={`absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-white shadow-sm hover:text-red-500 disabled:cursor-wait disabled:opacity-60 dark:bg-dark-surface ${
     liked ? 'text-red-500' : 'text-gray-600 dark:text-gray-300'
   }`}
 >
@@ -36,6 +37,11 @@ const liked = isWishlisted(product.id);
 
      
       <div className="flex flex-1 flex-col p-4">
+        {wishlistError && (
+          <p role="alert" className="mb-2 text-xs text-red-600 dark:text-red-300">
+            {wishlistError}
+          </p>
+        )}
         <h3 className="text-sm font-semibold text-gray-900 dark:text-white">
           <Link to={`/products/${product.id}`} className="hover:text-brand">
             {product.name}
