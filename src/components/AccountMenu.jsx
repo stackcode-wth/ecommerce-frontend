@@ -1,9 +1,20 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { User, LogIn, LogOut, X } from 'lucide-react';
+import {
+  User,
+  LogIn,
+  LogOut,
+  X,
+  CircleHelp,
+  RotateCcw,
+  Truck,
+} from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 const menuItems = [
+  { label: 'FAQs', path: '/faqs', icon: CircleHelp },
+  { label: 'Returns & Refunds', path: '/returns-refunds', icon: RotateCcw },
+  { label: 'Shipping Policy', path: '/shipping-policy', icon: Truck },
   { label: 'My Profile', path: '/profile', icon: User },
   { label: 'Login', path: '/login', icon: LogIn },
 ];

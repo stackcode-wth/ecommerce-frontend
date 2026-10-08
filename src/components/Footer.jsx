@@ -47,6 +47,7 @@ function Footer() {
           </div>
 
           <div>
+
             <h3 className="font-semibold text-gray-900 dark:text-white">Customer Service</h3>
             <ul className="mt-3 space-y-2 text-sm text-gray-600 dark:text-gray-300">
               {serviceLinks.map((link) => (
